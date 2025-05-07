@@ -25,13 +25,11 @@ app.post('/create', async (req, res) => {
     try {
         const url = req.query.url;
         const newID = await lib.shortUrl(url);
-        res.send(newID);
-
+        res.json({ id: newID }); // Trả về dạng JSON đúng
     } catch (err) {
-        res.send(err)
+        res.status(500).json({ error: err }); // Trả về lỗi dưới dạng JSON
     }
 });
-
 app.listen(port, () => {
     console.log(`CS1 app listening on port ${port}`);
 })
