@@ -1,7 +1,15 @@
-local ids = {"EjIBY", "KHc0S", "Qqb9b", "c0x27", "XuKWV", "NoHpg", "43IBP", "8VWEF", "ypLKP", "DCFx6"}
-local counter = 0
-request = function()
-  counter = (counter % #ids) + 1
-  local id = ids[counter]
-  return wrk.format("GET", "/short/" .. id)
-end
+local ids = {
+    "jEk0H", "OxaCZ", "Iz3Tj", "IQWau", "HrHqd", 
+    "94wwY", "d1HqS", "1wqfZ", "kTPMQ", "KqMJK"
+  }
+  local counter = 0
+  
+  request = function()
+    counter = (counter % #ids) + 1
+    local id = ids[counter]
+    local response = wrk.format("GET", "/short/" .. id)
+  
+    -- Gửi request và trả về response
+    return response
+  end
+  
