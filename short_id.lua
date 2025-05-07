@@ -1,21 +1,7 @@
+local ids = {"EjIBY", "KHc0S", "Qqb9b", "c0x27", "XuKWV", "NoHpg", "43IBP", "8VWEF", "ypLKP", "DCFx6"}
 local counter = 0
-local ids = {}  
 request = function()
-    counter = counter + 1
-    
-    local long_url = "https://example.com/page/" .. counter
-    local payload = '{"long_url":"' .. long_url .. '"}'
-    
-    local post_response = wrk.format("POST", "/create", 
-        {["Content-Type"] = "application/json"}, 
-        payload)
-    
-    table.insert(ids, counter) 
-    
-
-    local id = tostring(ids[counter]) 
-    local get_url = "/short/" .. id
-    local get_response = wrk.format("GET", get_url)
-
-    return get_response
+  counter = (counter % #ids) + 1
+  local id = ids[counter]
+  return wrk.format("GET", "/short/" .. id)
 end

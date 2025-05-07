@@ -1,7 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const lib = require('./utils')
 const app = express()
 const port = 3000
+
+app.use(cors())
 
 app.get('/short/:id', async (req, res) => {
     try {
