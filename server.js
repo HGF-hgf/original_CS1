@@ -11,15 +11,14 @@ app.get('/short/:id', async (req, res) => {
         const id = req.params.id;
         const url = await lib.findOrigin(id);
         if (url == null) {
-            res.send("<h1>404</h1>");
-        }
-        else {
-            res.send(url);
+            res.status(404).send("<h1>404 - Not Found</h1>");
+        } else {
+            res.redirect(302, url); 
         }
     } catch (err) {
-        res.send(err)
+        res.status(500).send("<h1>500 - Internal Server Error</h1>");
     }
-})
+});
 
 app.post('/create', async (req, res) => {
     try {
